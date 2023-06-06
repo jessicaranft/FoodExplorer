@@ -87,7 +87,6 @@ export function Home() {
                   <SwiperSlide key={String(index)}>
                     <FoodCard
                       data={item}
-                      onClick={() => handleFoodDetails(item.id)}
                     />
                   </SwiperSlide>
                 ))
@@ -110,7 +109,6 @@ export function Home() {
                   <SwiperSlide key={String(index)}>
                     <FoodCard
                       data={item}
-                      onClick={() => handleFoodDetails(item.id)}
                     />
                   </SwiperSlide>
                 ))
@@ -133,7 +131,6 @@ export function Home() {
                   <SwiperSlide key={String(index)}>
                     <FoodCard
                       data={item}
-                      onClick={() => handleFoodDetails(item.id)}
                     />
                   </SwiperSlide>
                 ))

@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Container } from './styles';
@@ -7,7 +6,6 @@ import iconPencil from '../../assets/icon-pencil.svg';
 import { api } from '../../services/api';
 
 export function FoodCardAdmin({ data, ...rest }) {
-  const [foods, setFoods] = useState([]);
   const imageUrl = `${api.defaults.baseURL}/files/${data.image}`;
 
   const navigate = useNavigate();

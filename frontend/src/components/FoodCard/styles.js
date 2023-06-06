@@ -14,8 +14,6 @@ export const Container = styled.div`
   align-items: center;
   gap: 1.2rem;
 
-  cursor: pointer;
-
   > p {
     font-size: 1.4rem;
     font-weight: 400;
@@ -41,10 +39,11 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.LIGHT_300};
   }
 
-  #card-icon {
+  .card-icon {
     position: absolute;
     top: 1.6rem;
     right: 1.6rem;
+    cursor: pointer;
   }
 
   .card-image {

@@ -82,6 +82,10 @@ export function Header() {
           icon={searchIcon}
         />
 
+        <Link to="/favorites" className="desktop-only my-favorites">
+          Meus favoritos
+        </Link>
+
         <Button title="Pedidos (0)" showIcon={true} tomato100 className="button desktop-only" />
 
         <Logout onClick={handleSignOut} className="desktop-only">

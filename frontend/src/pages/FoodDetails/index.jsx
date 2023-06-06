@@ -8,7 +8,6 @@ import { Container, Navigation, Main } from './styles';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { ButtonText } from '../../components/ButtonText';
-import foodPhoto from '../../assets/food-image/meal-salada-ravanello.png';
 import { IngredientTag } from '../../components/IngredientTag';
 import { Counter } from '../../components/Counter';
 import { Button } from '../../components/Button';
