@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { api } from '../../services/api';
 import { SearchContext } from '../../hooks/search';
+import { AuthContext } from '../../hooks/auth';
 
 import { Container, Navigation, Main } from './styles';
 import { Header } from '../../components/Header';
@@ -13,7 +14,10 @@ import { Counter } from '../../components/Counter';
 import { Button } from '../../components/Button';
 
 export function FoodDetails() {
+  const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
+  const [quantity, setQuantity] = useState(1);
+
   const searchTitle = new URLSearchParams(location.search).get("title");
   const [search, setSearch] = useState(searchTitle || "");
 
@@ -24,6 +28,36 @@ export function FoodDetails() {
 
   function handleBack() {
     navigate(-1);
+  }
+
+  // Add items to cart
+  function handleDecrement() {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  }
+
+  function handleIncrement() {
+    setQuantity(quantity + 1);
+  }
+
+  async function handleAddToCart() {
+    try {
+      const user_id = user.id;
+      const food_id = data.id;
+
+      await api.post("/cart-item", {
+        user_id,
+        food_id,
+        quantity: quantity,
+      });
+
+      alert("Prato adicionado com sucesso!");
+      navigate("/");
+
+    } catch (error) {
+      alert("Erro ao adicionar itens no carrinho.");
+    }
   }
 
   useEffect(() => {
@@ -84,9 +118,19 @@ export function FoodDetails() {
           }
 
           <div className="checkout-container">
-            <Counter size="large" />
-            <Button title="pedir - R$ 25,00" showIcon={true} className="btn-checkout mobile-only" tomato100 />
-            <Button title="incluir - R$ 25,00" showIcon={false} className="btn-checkout desktop-only" tomato100 />
+            <Counter
+              size="large"
+              quantity={quantity}
+              onDecrement={handleDecrement}
+              onIncrement={handleIncrement}
+            />
+            <Button
+              onClick={handleAddToCart}
+              title={`incluir - ${data.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL"})}`}
+              showIcon={true}
+              className="btn-checkout"
+              tomato100
+            />
           </div>
         </div>
 

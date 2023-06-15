@@ -53,6 +53,21 @@ export function EditFood() {
     setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
   }
 
+  function handleChangePrice(e) {
+    const value = e.target.value;
+    const formattedValue = formatPrice(value);
+    setPrice(formattedValue);
+  }
+
+  function formatPrice(value) {
+    if (!value) {
+      return '';
+    }
+
+    const formattedValue = value.replace(',', '.');
+    return formattedValue;
+  }
+
   async function handleUpdateFood() {
     if (!title) {
       return alert("Digite o nome do prato.");
@@ -81,9 +96,9 @@ export function EditFood() {
     formData.append("category", category);
     formData.append("price", price);
 
-    ingredients.map(ingredient => (
-      formData.append("ingredients", ingredient)
-    ));
+    for (let i = 0; i < ingredients.length; i++) {
+      formData.append("ingredients[]", ingredients[i]);
+    }
 
     await api
       .put(`/food/${params.id}`, formData)
@@ -228,15 +243,19 @@ export function EditFood() {
 
           <div className="input-container">
             <label htmlFor="price">Preço</label>
-            <Input
-              type="text"
-              id="price"
-              placeholder="R$ 00,00"
-              showIcon={false}
-              onChange={e => setPrice(e.target.value)}
-              value={price}
-            />
+            <div className="price-input-container">
+              <span className="currency-symbol">R$</span>
+              <Input
+                type="number"
+                id="price"
+                placeholder="00,00"
+                onChange={handleChangePrice}
+                value={price}
+                className="price-input"
+              />
+            </div>
           </div>
+
         </div>
 
         <div className="input-container">

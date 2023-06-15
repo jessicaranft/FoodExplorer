@@ -32,7 +32,7 @@ export function FoodCardAdmin({ data, ...rest }) {
         {data.description}
       </p>
 
-      <span>{data.price}</span>
+      <span>{data.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL"})}</span>
     </Container>
   );
 }

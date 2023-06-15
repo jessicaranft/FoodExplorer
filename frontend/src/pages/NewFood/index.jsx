@@ -52,6 +52,21 @@ export function NewFood() {
     setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
   }
 
+  function handleChangePrice(e) {
+    const value = e.target.value;
+    const formattedValue = formatPrice(value);
+    setPrice(formattedValue);
+  }
+
+  function formatPrice(value) {
+    if (!value) {
+      return '';
+    }
+
+    const formattedValue = value.replace(',', '.');
+    return formattedValue;
+  }
+
   async function handleNewFood() {
     if (!imageFile) {
       return alert("Insira uma imagem para o prato ou bebida.");
@@ -181,13 +196,19 @@ export function NewFood() {
 
           <div className="input-container">
             <label htmlFor="price">Preço</label>
-            <Input
-              type="text"
-              id="price"
-              placeholder="R$ 00,00"
-              onChange={e => setPrice(e.target.value)}
-            />
+            <div className="price-input-container">
+              <span className="currency-symbol">R$</span>
+              <Input
+                type="number"
+                id="price"
+                placeholder="00,00"
+                value={price}
+                onChange={handleChangePrice}
+                className="price-input"
+              />
+            </div>
           </div>
+
         </div>
 
         <div className="input-container">

@@ -86,6 +86,22 @@ export const Form = styled.form`
     background-position: right 2rem top 2rem;
   }
 
+  .price-input-container {
+    position: relative;
+  }
+
+  .currency-symbol {
+    position: absolute;
+    left: 1.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .price-input {
+    padding-left: 2rem;
+  }
+
   .ingredients-tags-container {
     width: 100%;
     height: 4.8rem;
@@ -102,6 +118,16 @@ export const Form = styled.form`
   .input-container textarea {
     height: 17.2rem;
     padding: 1.4rem;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type=number] {
+    -moz-appearance: textfield;
   }
 
   @media (min-width: 769px) {
