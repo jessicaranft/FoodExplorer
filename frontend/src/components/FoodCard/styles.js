@@ -80,6 +80,7 @@ export const Container = styled.div`
 
     .card-image {
       width: 17.6rem;
+      cursor: pointer;
     }
 
     .cta-container {

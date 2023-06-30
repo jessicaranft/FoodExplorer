@@ -57,6 +57,9 @@ export function MobileMenu({ className, id }) {
                 <Link to="/favorites">Meus favoritos</Link>
               </li>
               <li>
+                <Link to="/history">Histórico de pedidos</Link>
+              </li>
+              <li>
                 <Logout onClick={handleSignOut}>
                   Sair
                 </Logout>

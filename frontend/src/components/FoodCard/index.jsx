@@ -8,12 +8,15 @@ import { Counter } from '../../components/Counter';
 
 import { api } from '../../services/api';
 import { AuthContext } from '../../hooks/auth';
+import { OrderContext } from '../../hooks/order';
 
 export function FoodCard({ data, ...rest }) {
   const { user } = useContext(AuthContext);
+  const { totalItems, setTotalItems } = useContext(OrderContext);
   const [quantity, setQuantity] = useState(1);
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteId, setFavoriteId] = useState(null);
+  const [order, setOrder] = useState();
 
   const imageUrl = `${api.defaults.baseURL}/files/${data.image}`;
 
@@ -36,14 +39,16 @@ export function FoodCard({ data, ...rest }) {
 
   async function handleAddToCart() {
     try {
-      const user_id = user.id;
+      const order_id = order.id;
       const food_id = data.id;
 
-      await api.post("/cart-item", {
-        user_id,
+      await api.post(`/orders-items/${user.id}`, {
+        order_id,
         food_id,
         quantity: quantity,
       });
+
+      setTotalItems(totalItems + quantity);
 
       alert("Prato adicionado com sucesso!");
 
@@ -74,6 +79,15 @@ export function FoodCard({ data, ...rest }) {
       alert("Erro ao remover dos favoritos.");
     }
   }
+
+  useEffect(() => {
+    async function fetchOrder() {
+      const response = await api.get(`/orders/history?user_id=${user.id}`); // index
+      setOrder(response.data);
+    }
+
+    fetchOrder();
+  }, []);
 
   useEffect(() => {
     async function checkIsFavorite() {

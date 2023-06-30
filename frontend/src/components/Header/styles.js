@@ -12,6 +12,10 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  a {
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
+
   #menu-hamburger {
     width: 2.4rem;
   }
@@ -86,7 +90,7 @@ export const Container = styled.div`
       justify-content: center;
     }
 
-    .my-favorites {
+    .nav-links {
       font-family: 'Roboto';
       font-weight: 400;
       font-size: 1.6rem;

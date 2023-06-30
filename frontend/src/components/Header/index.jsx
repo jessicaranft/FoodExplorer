@@ -1,8 +1,11 @@
 import { useContext, useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
-import { useAuth } from '../../hooks/auth';
+import { useAuth, AuthContext } from '../../hooks/auth';
 import { SearchContext } from '../../hooks/search';
+import { OrderContext } from '../../hooks/order';
+
+import { api } from '../../services/api';
 
 import { Button } from '../Button';
 import { SearchInput } from '../SearchInput';
@@ -15,9 +18,12 @@ import iconSignOut from '../../assets/icon-signout.svg';
 import searchIcon from '../../assets/icon-search.svg';
 
 export function Header() {
+  const { user } = useContext(AuthContext);
   const { signOut } = useAuth();
   const { setSearch } = useContext(SearchContext);
+  const { totalItems, setTotalItems } = useContext(OrderContext);
   const [searchInput, setSearchInput] = useState("");
+  const [order, setOrder] = useState();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -42,6 +48,19 @@ export function Header() {
     navigate("/");
     signOut();
   }
+
+  useEffect(() => {
+    async function fetchOrder() {
+      const response = await api.get(`/orders?user_id=${user.id}`);
+      setOrder(response.data);
+
+      if (response.data && response.data.total_items) {
+        setTotalItems(response.data.total_items);
+      }
+    }
+
+    fetchOrder();
+  }, [user.id, order, setTotalItems]);
 
   useEffect(() => {
     setSearch(searchInput);
@@ -82,22 +101,41 @@ export function Header() {
           icon={searchIcon}
         />
 
-        <Link to="/favorites" className="desktop-only my-favorites">
+        <Link to="/favorites" className="desktop-only nav-links">
           Meus favoritos
         </Link>
 
-        <Button title="Pedidos (0)" showIcon={true} tomato100 className="button desktop-only" />
+        <Link to="/history" className="desktop-only nav-links">
+          Histórico de pedidos
+        </Link>
 
+        {
+          order &&
+          <Button
+            title={`Meu pedido (${totalItems})`}
+            showIcon={true}
+            tomato100
+            className="button desktop-only"
+            as={Link}
+            to="/order"
+          />
+        }
+        
         <Logout onClick={handleSignOut} className="desktop-only">
           <img src={iconSignOut} alt="clique aqui para sair da sessão" />
         </Logout>
 
       </div>
 
-      <div className="icon-receipt-container mobile-only">
-        <img src={iconReceipt} alt="clique neste ícone para ver seus pedidos" id="icon-receipt" />
-        <div className="red-circle">0</div>
-      </div>
+      <Link to="/order">
+        <div className="icon-receipt-container mobile-only">
+          <img src={iconReceipt} alt="clique neste ícone para ver seus pedidos" id="icon-receipt" />
+          {
+            order &&
+            <div className="red-circle">{totalItems}</div>
+          }
+        </div>
+      </Link>
 
     </Container>
   );

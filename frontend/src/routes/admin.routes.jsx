@@ -4,6 +4,7 @@ import { HomeAdmin } from '../pages/HomeAdmin';
 import { FoodDetailsAdmin } from '../pages/FoodDetailsAdmin';
 import { EditFood } from '../pages/EditFood';
 import { NewFood } from '../pages/NewFood';
+import { OrdersAdmin } from '../pages/OrdersAdmin';
 
 export function AdminRoutes() {
   return (
@@ -12,6 +13,7 @@ export function AdminRoutes() {
       <Route path="/details/:id" element={<FoodDetailsAdmin />} />
       <Route path="/edit/:id" element={<EditFood />} />
       <Route path="/new" element={<NewFood />} />
+      <Route path="/orders" element={<OrdersAdmin />} />
     </Routes>
   );
 }

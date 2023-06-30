@@ -53,6 +53,14 @@ export const Container = styled.div`
       justify-content: center;
     }
 
+    .nav-links {
+      font-family: 'Roboto';
+      font-weight: 400;
+      font-size: 1.6rem;
+      line-height: 100%;
+      color: ${({ theme }) => theme.COLORS.LIGHT_300};
+    }
+
     .desktop-container {
       max-width: 1440px;
       margin: auto;

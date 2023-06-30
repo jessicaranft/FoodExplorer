@@ -7,6 +7,7 @@ import SwiperCore, { Navigation } from 'swiper';
 
 import { api } from '../../services/api';
 import { SearchContext } from '../../hooks/search';
+import { OrderProvider } from '../../hooks/order';
 
 import { Container, Main } from './styles';
 import { Header } from '../../components/Header';
@@ -59,7 +60,9 @@ export function Home() {
   return (
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
-        <Header />
+        <OrderProvider>
+          <Header />
+        </OrderProvider>
       </SearchContext.Provider>
 
       <Main>
@@ -85,9 +88,9 @@ export function Home() {
               {
                 foods.filter(food => food.category == "meal").map((item, index) => (
                   <SwiperSlide key={String(index)}>
-                    <FoodCard
-                      data={item}
-                    />
+                    <OrderProvider>
+                      <FoodCard data={item} />
+                    </OrderProvider>
                   </SwiperSlide>
                 ))
               }
@@ -107,9 +110,9 @@ export function Home() {
               {
                 foods.filter(food => food.category == "dessert").map((item, index) => (
                   <SwiperSlide key={String(index)}>
-                    <FoodCard
-                      data={item}
-                    />
+                    <OrderProvider>
+                      <FoodCard data={item} />
+                    </OrderProvider>
                   </SwiperSlide>
                 ))
               }
@@ -129,9 +132,9 @@ export function Home() {
               {
                 foods.filter(food => food.category == "drink").map((item, index) => (
                   <SwiperSlide key={String(index)}>
-                    <FoodCard
-                      data={item}
-                    />
+                    <OrderProvider>
+                      <FoodCard data={item} />
+                    </OrderProvider>
                   </SwiperSlide>
                 ))
               }

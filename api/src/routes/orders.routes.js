@@ -10,6 +10,9 @@ const ordersController = new OrdersController();
 ordersRoutes.use(ensureAuthenticated);
 
 ordersRoutes.put("/:user_id", ordersController.updatePayment);
-ordersRoutes.patch("/:user_id", ordersController.updateStatus);
+ordersRoutes.patch("/:order_id", ordersController.updateStatus);
+ordersRoutes.post("/:user_id/:order_id", ordersController.completeOrder);
+ordersRoutes.get("/history", ordersController.index);
+ordersRoutes.get("/", ordersController.show);
 
 module.exports = ordersRoutes;

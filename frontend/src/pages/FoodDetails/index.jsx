@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { api } from '../../services/api';
 import { SearchContext } from '../../hooks/search';
 import { AuthContext } from '../../hooks/auth';
+import { OrderProvider } from '../../hooks/order';
 
 import { Container, Navigation, Main } from './styles';
 import { Header } from '../../components/Header';
@@ -17,6 +18,7 @@ export function FoodDetails() {
   const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
   const [quantity, setQuantity] = useState(1);
+  const [order, setOrder] = useState();
 
   const searchTitle = new URLSearchParams(location.search).get("title");
   const [search, setSearch] = useState(searchTitle || "");
@@ -43,11 +45,11 @@ export function FoodDetails() {
 
   async function handleAddToCart() {
     try {
-      const user_id = user.id;
+      const order_id = order.id;
       const food_id = data.id;
 
-      await api.post("/cart-item", {
-        user_id,
+      await api.post(`/orders-items/${user.id}`, {
+        order_id,
         food_id,
         quantity: quantity,
       });
@@ -70,6 +72,15 @@ export function FoodDetails() {
   }, []);
 
   useEffect(() => {
+    async function fetchOrder() {
+      const response = await api.get(`/orders/history?user_id=${user.id}`); // index
+      setOrder(response.data);
+    }
+
+    fetchOrder();
+  }, []);
+
+  useEffect(() => {
     async function fetchFood() {
       const response = await api.get(`/food?title=${search}`)
       setFoods(response.data);
@@ -81,7 +92,9 @@ export function FoodDetails() {
   return (
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
-        <Header />
+        <OrderProvider>
+          <Header />
+        </OrderProvider>
       </SearchContext.Provider>
 
       <Navigation>
@@ -97,44 +110,44 @@ export function FoodDetails() {
         data &&
         <Main>
           
-        <img src={`${api.defaults.baseURL}/files/${data.image}`} alt={`foto do prato ou bebida ${data.title}`} className="food-image" />
+          <img src={`${api.defaults.baseURL}/files/${data.image}`} alt={`foto do prato ou bebida ${data.title}`} className="food-image" />
 
-        <div className="food-description">
-          <h1>{data.title}</h1>
-          <p>{data.description}</p>
+          <div className="food-description">
+            <h1>{data.title}</h1>
+            <p>{data.description}</p>
 
-          {
-            data.ingredients &&
-              <div className="tags-container">
-                {
-                  data.ingredients.map(ingredient => (
-                    <IngredientTag
-                      key={String(ingredient.id)}
-                      title={ingredient.name}
-                    />
-                  ))
-                }
-              </div>
-          }
+            {
+              data.ingredients &&
+                <div className="tags-container">
+                  {
+                    data.ingredients.map(ingredient => (
+                      <IngredientTag
+                        key={String(ingredient.id)}
+                        title={ingredient.name}
+                      />
+                    ))
+                  }
+                </div>
+            }
 
-          <div className="checkout-container">
-            <Counter
-              size="large"
-              quantity={quantity}
-              onDecrement={handleDecrement}
-              onIncrement={handleIncrement}
-            />
-            <Button
-              onClick={handleAddToCart}
-              title={`incluir - ${data.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL"})}`}
-              showIcon={true}
-              className="btn-checkout"
-              tomato100
-            />
+            <div className="checkout-container">
+              <Counter
+                size="large"
+                quantity={quantity}
+                onDecrement={handleDecrement}
+                onIncrement={handleIncrement}
+              />
+              <Button
+                onClick={handleAddToCart}
+                title={`incluir - ${data.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL"})}`}
+                showIcon={true}
+                className="btn-checkout"
+                tomato100
+              />
+            </div>
           </div>
-        </div>
 
-      </Main>
+        </Main>
       }
 
       <Footer />

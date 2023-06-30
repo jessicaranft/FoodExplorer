@@ -87,7 +87,11 @@ export function HeaderAdmin() {
           icon={searchIcon}
         />
 
-          <Button tomato100 title="Novo prato" showIcon={false} className="button desktop-only" as={Link} to="/new" />
+        <Link to="/orders" className="desktop-only nav-links">
+          Lista de pedidos
+        </Link>
+
+        <Button tomato100 title="Novo prato" showIcon={false} className="button desktop-only" as={Link} to="/new" />
 
         <Logout onClick={handleSignOut} className="desktop-only">
           <img src={iconSignOut} alt="clique aqui para sair da sessão" />

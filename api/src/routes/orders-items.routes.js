@@ -11,6 +11,6 @@ ordersItemsRoutes.use(ensureAuthenticated);
 
 ordersItemsRoutes.post("/:user_id", ordersItemsController.create);
 ordersItemsRoutes.get("/", ordersItemsController.index);
-ordersItemsRoutes.delete("/:user_id", ordersItemsController.delete);
+ordersItemsRoutes.delete("/:user_id/:id", ordersItemsController.delete);
 
 module.exports = ordersItemsRoutes;

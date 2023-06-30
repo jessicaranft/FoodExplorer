@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 
 import { SearchContext } from '../../hooks/search';
 import { AuthContext } from '../../hooks/auth';
+import { OrderProvider } from '../../hooks/order';
 
 import { api } from '../../services/api';
 
@@ -44,7 +45,9 @@ export function Favorites() {
   return(
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
-        <Header />
+        <OrderProvider>
+          <Header />
+        </OrderProvider>
       </SearchContext.Provider>
 
       <Main>

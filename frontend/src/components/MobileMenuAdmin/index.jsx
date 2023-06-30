@@ -57,6 +57,9 @@ export function MobileMenuAdmin({ className, id }) {
                 <Link to="/new">Novo prato</Link>
               </li>
               <li>
+                <Link to="/orders">Histórico de pedidos</Link>
+              </li>
+              <li>
                 <Logout onClick={handleSignOut}>
                   Sair
                 </Logout>
