@@ -169,7 +169,7 @@ export function FoodCard({ data, ...rest }) {
           onClick={handleAddToCart}
           title="incluir"
           className="card-button"
-          showIcon={false}
+          showicon={false}
           tomato100
         />
       </div>

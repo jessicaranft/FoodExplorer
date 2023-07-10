@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FiUpload } from 'react-icons/fi';
 
 import { api } from '../../services/api';
 import { SearchContext } from '../../hooks/search';
@@ -12,9 +13,8 @@ import { Input } from '../../components/Input';
 import { IngredientTagItem } from '../../components/IngredientTagItem';
 import { Textarea } from '../../components/Textarea';
 import { Button } from '../../components/Button';
-import iconUpload from '../../assets/icon-upload.svg';
 
-export function NewFood() {
+export function NewFood({ selectedTheme, setSelectedTheme }) {
   const [foods, setFoods] = useState([]);
   const searchTitle = new URLSearchParams(location.search).get("title");
   const [search, setSearch] = useState(searchTitle || "");
@@ -118,7 +118,10 @@ export function NewFood() {
   return (
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
-        <HeaderAdmin />
+        <HeaderAdmin
+          setSelectedTheme={setSelectedTheme}
+          selectedTheme={selectedTheme}  
+        />
       </SearchContext.Provider>
 
       <Navigation>
@@ -138,7 +141,7 @@ export function NewFood() {
             <p>Imagem do prato</p>
             <div className="file-input-container">
               <label htmlFor="image" className="file-input-container">
-                <img src={iconUpload} alt="clique aqui para fazer o upload da imagem do prato" />
+                <FiUpload size={30} />
                 <input type="file" id="image" onChange={handleAddImage} />
                 <p className="file-input-message">{fileMessage}</p>
               </label>
@@ -223,7 +226,7 @@ export function NewFood() {
         <div className="button-container">
           <Button
             title="Salvar alterações"
-            showIcon={false}
+            showicon={false}
             tomato400
             onClick={handleNewFood}
           />

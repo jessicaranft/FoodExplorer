@@ -30,5 +30,9 @@ export const Container = styled.div`
     background: none;
     border: none;
     padding-right: 1.6rem;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+
+    display: flex;
+    align-items: center;
   }
 `;

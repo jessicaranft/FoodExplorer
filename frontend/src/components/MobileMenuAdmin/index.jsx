@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { AiOutlineClose } from 'react-icons/ai';
 
 import { useAuth } from '../../hooks/auth';
 import { SearchContext } from '../../hooks/search';
@@ -7,7 +8,6 @@ import { SearchContext } from '../../hooks/search';
 import { Container, Header, Logout } from './styles';
 import { Footer } from '../../components/Footer';
 import { SearchInput } from '../../components/SearchInput';
-import iconClose from '../../assets/menu-close.svg';
 import searchIcon from '../../assets/icon-search.svg';
 
 export function MobileMenuAdmin({ className, id }) {
@@ -37,7 +37,7 @@ export function MobileMenuAdmin({ className, id }) {
     <Container className={className} id={id}>
       <Header>
         <button onClick={handleCloseMenu}>
-          <img src={iconClose} alt="clique aqui para fechar o menu" />
+          <AiOutlineClose size={28} />
         </button>
         Menu
       </Header>

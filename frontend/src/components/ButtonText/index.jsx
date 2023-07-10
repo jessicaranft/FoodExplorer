@@ -1,13 +1,13 @@
 import { Container } from './styles';
-import arrow from '../../assets/arrow-left.svg';
+import { MdArrowBackIosNew } from 'react-icons/md';
 
 export function ButtonText({ title, size = "normal",...rest }) {
-  const iconSize = size === "large" ? "22px" : "15px";
+  const iconSize = size === "large" ? 22 : 15;
   const fontSize = size === "large" ? "24px" : "16px";
 
   return (
     <Container type="button" {...rest}>
-      <img src={arrow} alt="seta para a esquerda" style={{ height: iconSize }} />
+      <MdArrowBackIosNew size={iconSize} />
       <p style={{ fontSize }}>{title}</p>
     </Container>
   );

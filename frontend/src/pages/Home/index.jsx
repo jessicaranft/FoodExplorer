@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
@@ -17,7 +16,7 @@ import { Footer } from '../../components/Footer';
 
 SwiperCore.use([Navigation]);
 
-export function Home() {
+export function Home({ selectedTheme, setSelectedTheme }) {
   const [foods, setFoods] = useState([]);
 
   const searchTitle = new URLSearchParams(location.search).get("title");
@@ -42,12 +41,6 @@ export function Home() {
     },
   }
 
-  const navigate = useNavigate();
-
-  function handleFoodDetails(id) {
-    navigate(`/details/${id}`);
-  }
-
   useEffect(() => {
     async function fetchFood() {
       const response = await api.get(`/food?title=${search}`)
@@ -61,11 +54,15 @@ export function Home() {
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
         <OrderProvider>
-          <Header />
+          <Header
+            setSelectedTheme={setSelectedTheme}
+            selectedTheme={selectedTheme}  
+          />
         </OrderProvider>
       </SearchContext.Provider>
 
       <Main>
+
         <div className="banner-container">
           <div className="home-image">
           </div>

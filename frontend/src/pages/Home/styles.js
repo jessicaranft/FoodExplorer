@@ -8,6 +8,20 @@ export const Container = styled.div`
 
 export const Main = styled.main`
   padding: 1.6rem;
+  position: relative;
+
+  .theme-btn {
+    background: none;
+    border: none;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    right: 50%;
+    top: 1.6rem;
+  }
 
   .banner-container {
     width: 100%;
@@ -15,7 +29,7 @@ export const Main = styled.main`
     border-radius: 3px;
     margin: 4.4rem auto;
 
-    background: linear-gradient(180deg, #091E26 0%, #00131C 100%);
+    background: linear-gradient(180deg, ${({ theme }) => theme.COLORS.GRADIENT_900} 0%, ${({ theme }) => theme.COLORS.GRADIENT_800} 100%);
 
     display: grid;
     grid-template-columns: 45% 65%;

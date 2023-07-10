@@ -9,7 +9,7 @@ import { Container, Main } from './styles';
 import { HeaderAdmin } from '../../components/HeaderAdmin';
 import { Footer } from '../../components/Footer';
 
-export function OrdersAdmin() {
+export function OrdersAdmin({ selectedTheme, setSelectedTheme }) {
   const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -80,7 +80,10 @@ export function OrdersAdmin() {
   return (
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
-        <HeaderAdmin />
+        <HeaderAdmin
+          setSelectedTheme={setSelectedTheme}
+          selectedTheme={selectedTheme}  
+        />
       </SearchContext.Provider>
 
       <Main>

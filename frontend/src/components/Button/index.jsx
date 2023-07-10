@@ -1,9 +1,9 @@
 import { Container } from './styles';
-import icon from '../../assets/icon-receipt.svg';
+import { HiOutlineShoppingBag } from 'react-icons/hi';
 
 export function Button({
   title,
-  showIcon = true,
+  showicon,
   tomato100,
   tomato200,
   tomato400,
@@ -16,10 +16,10 @@ export function Button({
       tomato100={tomato100}
       tomato200={tomato200}
       tomato400={tomato400}
-      dark800={dark800}
+      dark800={dark800}      
       {...rest}
     >
-      {showIcon && <img src={icon} alt="ícone do botão de checkout" />}
+      {showicon && <HiOutlineShoppingBag size={20} />}
       {title}
     </Container>
   );

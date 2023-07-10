@@ -70,6 +70,7 @@ export const Header = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
   }
 
   > img {

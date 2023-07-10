@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
+import { HiOutlinePencil } from 'react-icons/hi';
 
 import { Container } from './styles';
-import iconPencil from '../../assets/icon-pencil.svg';
 
 import { api } from '../../services/api';
 
@@ -21,7 +21,7 @@ export function FoodCardAdmin({ data, ...rest }) {
   return (
     <Container {...rest}>
       <button id="card-icon" onClick={() => {handleEditDetails(data.id)}}>
-        <img src={iconPencil} />
+        <HiOutlinePencil size={28} />
       </button>
       <img src={imageUrl} className="card-image" onClick={() => handleFoodDetails(data.id)} />
       <button onClick={() => handleFoodDetails(data.id)}>

@@ -1,19 +1,19 @@
 import { useContext, useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { MdOutlineDarkMode, MdOutlineLightMode, MdOutlineLogout, MdOutlineMenu } from 'react-icons/md';
 
 import { useAuth } from '../../hooks/auth';
 import { SearchContext } from '../../hooks/search';
 
+import { dark, light } from '../../styles/themes';
 import { Button } from '../Button';
 import { SearchInput } from '../SearchInput';
 import { Container, Branding, Logout } from './styles';
 import { MobileMenuAdmin } from '../MobileMenuAdmin';
-import menuHamburger from '../../assets/menu-hamburger.svg';
 import logo from '../../assets/logo.svg';
-import iconSignOut from '../../assets/icon-signout.svg';
 import searchIcon from '../../assets/icon-search.svg';
 
-export function HeaderAdmin() {
+export function HeaderAdmin({ selectedTheme, setSelectedTheme }) {
   const { signOut } = useAuth();
   const { setSearch } = useContext(SearchContext);
   const [searchInput, setSearchInput] = useState("");
@@ -42,6 +42,10 @@ export function HeaderAdmin() {
     signOut();
   }
 
+  function toggleTheme() {
+    setSelectedTheme((currentTheme) => currentTheme === dark ? light : dark);
+  }
+
   useEffect(() => {
     setSearch(searchInput);
     const searchParams = new URLSearchParams(location.search);
@@ -56,26 +60,22 @@ export function HeaderAdmin() {
         <MobileMenuAdmin id="menu" className="hide" />
       </SearchContext.Provider>
 
-      <Link onClick={handleOpenMenu}>
-        <img
-          src={menuHamburger}
-          alt="clique neste ícone para abrir o menu do aplicativo"
-          id="menu-hamburger"
-          className="mobile-only"
-        />
-      </Link>
+      <button onClick={handleOpenMenu}>
+        <MdOutlineMenu size={30} className="mobile-only"/>
+      </button>
 
 
       <div className="desktop-container">
         <Link to="/">
           <Branding>
-              <div>
-                <img src={logo} alt="logo com um polígono azul de seis lados" />
-                food explorer
-              </div>
-              <span>admin</span>
+            <div>
+              <img src={logo} alt="logo com um polígono azul de seis lados" />
+              food explorer
+            </div>
+            <span>admin</span>
           </Branding>
         </Link>
+
 
         <SearchInput
           type="text"
@@ -91,13 +91,32 @@ export function HeaderAdmin() {
           Lista de pedidos
         </Link>
 
-        <Button tomato100 title="Novo prato" showIcon={false} className="button desktop-only" as={Link} to="/new" />
+        <div className="desktop-only">
+          <button onClick={toggleTheme} className="themes-btn">
+            {selectedTheme === dark ? (
+              <MdOutlineLightMode size={24} />
+            ) : (
+              <MdOutlineDarkMode size={24} />
+            )}
+          </button>
+        </div>
 
-        <Logout onClick={handleSignOut} className="desktop-only">
-          <img src={iconSignOut} alt="clique aqui para sair da sessão" />
+        <Button tomato100="true" title="Novo prato" showicon={false} className="button desktop-only" as={Link} to="/new" />
+
+        <Logout onClick={handleSignOut} className="logout desktop-only">
+          <MdOutlineLogout size={30} />
         </Logout>
       </div>
 
+      <div className="mobile-only">
+        <button onClick={toggleTheme} className="themes-btn">
+          {selectedTheme === dark ? (
+            <MdOutlineLightMode size={24} />
+          ) : (
+            <MdOutlineDarkMode size={24} />
+          )}
+        </button>
+      </div>
     </Container>
   );
 }

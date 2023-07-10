@@ -1,5 +1,7 @@
 import { useContext, useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { MdOutlineDarkMode, MdOutlineLightMode, MdOutlineLogout, MdOutlineMenu } from 'react-icons/md';
+import { HiOutlineShoppingBag } from 'react-icons/hi';
 
 import { useAuth, AuthContext } from '../../hooks/auth';
 import { SearchContext } from '../../hooks/search';
@@ -7,21 +9,21 @@ import { OrderContext } from '../../hooks/order';
 
 import { api } from '../../services/api';
 
+import { dark, light } from '../../styles/themes';
 import { Button } from '../Button';
 import { SearchInput } from '../SearchInput';
 import { Container, Branding, Logout } from './styles';
 import { MobileMenu } from '../MobileMenu';
-import menuHamburger from '../../assets/menu-hamburger.svg';
-import iconReceipt from '../../assets/icon-receipt.svg';
+
 import logo from '../../assets/logo.svg';
-import iconSignOut from '../../assets/icon-signout.svg';
 import searchIcon from '../../assets/icon-search.svg';
 
-export function Header() {
+export function Header({ selectedTheme, setSelectedTheme }) {
   const { user } = useContext(AuthContext);
   const { signOut } = useAuth();
   const { setSearch } = useContext(SearchContext);
   const { totalItems, setTotalItems } = useContext(OrderContext);
+
   const [searchInput, setSearchInput] = useState("");
   const [order, setOrder] = useState();
 
@@ -49,6 +51,10 @@ export function Header() {
     signOut();
   }
 
+  function toggleTheme() {
+    setSelectedTheme((currentTheme) => currentTheme === dark ? light : dark);
+  }
+
   useEffect(() => {
     async function fetchOrder() {
       const response = await api.get(`/orders?user_id=${user.id}`);
@@ -72,16 +78,13 @@ export function Header() {
 
   return (
     <Container>
-      <MobileMenu id="menu" className="hide" />
+      <SearchContext.Provider value={{ setSearch }}>
+        <MobileMenu id="menu" className="hide" />
+      </SearchContext.Provider>
 
-      <Link onClick={handleOpenMenu}>
-        <img
-          src={menuHamburger}
-          alt="clique neste ícone para abrir o menu do aplicativo"
-          id="menu-hamburger"
-          className="mobile-only"
-        />
-      </Link>
+      <button onClick={handleOpenMenu}>
+        <MdOutlineMenu size={30} className="mobile-only"/>
+      </button>
 
       <div className="desktop-container">
         <Branding>
@@ -109,27 +112,47 @@ export function Header() {
           Histórico de pedidos
         </Link>
 
+        <div className="desktop-only">
+          <button onClick={toggleTheme} className="themes-btn">
+            {selectedTheme === dark ? (
+              <MdOutlineLightMode size={24} />
+            ) : (
+              <MdOutlineDarkMode size={24} />
+            )}
+          </button>
+        </div>
+
         {
           order &&
           <Button
             title={`Meu pedido (${totalItems})`}
-            showIcon={true}
-            tomato100
+            showicon={true}
+            tomato100="true"
             className="button desktop-only"
             as={Link}
             to="/order"
           />
         }
         
-        <Logout onClick={handleSignOut} className="desktop-only">
-          <img src={iconSignOut} alt="clique aqui para sair da sessão" />
+        <Logout onClick={handleSignOut} className="logout desktop-only">
+          <MdOutlineLogout size={30} />
         </Logout>
 
       </div>
 
+      <div className="mobile-only">
+        <button onClick={toggleTheme} className="themes-btn">
+          {selectedTheme === dark ? (
+            <MdOutlineLightMode size={24} />
+          ) : (
+            <MdOutlineDarkMode size={24} />
+          )}
+        </button>
+      </div>
+
       <Link to="/order">
         <div className="icon-receipt-container mobile-only">
-          <img src={iconReceipt} alt="clique neste ícone para ver seus pedidos" id="icon-receipt" />
+          <HiOutlineShoppingBag size={28} />
           {
             order &&
             <div className="red-circle">{totalItems}</div>

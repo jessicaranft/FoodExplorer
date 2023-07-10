@@ -14,7 +14,7 @@ import { IngredientTag } from '../../components/IngredientTag';
 import { Counter } from '../../components/Counter';
 import { Button } from '../../components/Button';
 
-export function FoodDetails() {
+export function FoodDetails({ selectedTheme, setSelectedTheme }) {
   const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
   const [quantity, setQuantity] = useState(1);
@@ -93,7 +93,10 @@ export function FoodDetails() {
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
         <OrderProvider>
-          <Header />
+          <Header
+            setSelectedTheme={setSelectedTheme}
+            selectedTheme={selectedTheme}  
+          />
         </OrderProvider>
       </SearchContext.Provider>
 
@@ -140,7 +143,7 @@ export function FoodDetails() {
               <Button
                 onClick={handleAddToCart}
                 title={`incluir - ${data.price.toLocaleString("pt-BR", { style: "currency", currency: "BRL"})}`}
-                showIcon={true}
+                showicon={true}
                 className="btn-checkout"
                 tomato100
               />

@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { MdOutlineDarkMode, MdOutlineLightMode } from 'react-icons/md';
 
 import { useAuth } from '../../hooks/auth';
 
+import { dark, light } from '../../styles/themes';
 import { Container, Branding, Form } from './styles';
 import logo from '../../assets/logo.svg';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
-export function SignIn() {
+export function SignIn({ selectedTheme, setSelectedTheme }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { signIn } = useAuth();
+
+  function toggleTheme(e) {
+    e.preventDefault();
+    setSelectedTheme((currentTheme) => currentTheme === dark ? light : dark);
+  }
 
   function handleSignIn() {
     signIn({ email, password });
@@ -33,7 +40,6 @@ export function SignIn() {
               type="text"
               id="email"
               placeholder="Exemplo: exemplo@exemplo.com.br"
-              showIcon={false}
               onChange={e => setEmail(e.target.value)}
             />
           </div>
@@ -44,7 +50,6 @@ export function SignIn() {
               type="password"
               id="password"
               placeholder="No mínimo 6 caracteres"
-              showIcon={false}
               onChange={e => setPassword(e.target.value)}
             />
           </div>
@@ -61,6 +66,14 @@ export function SignIn() {
               Criar uma conta
             </Link>
           </p>
+
+          <button onClick={toggleTheme} className="themes-btn">
+            {selectedTheme === dark ? (
+              <MdOutlineLightMode size={24} />
+            ) : (
+              <MdOutlineDarkMode size={24} />
+            )}
+          </button>
         </Form>
       </div>
     </Container>

@@ -6,14 +6,29 @@ import { EditFood } from '../pages/EditFood';
 import { NewFood } from '../pages/NewFood';
 import { OrdersAdmin } from '../pages/OrdersAdmin';
 
-export function AdminRoutes() {
+export function AdminRoutes({ selectedTheme, setSelectedTheme }) {
   return (
     <Routes>
-      <Route path="/" element={<HomeAdmin />} />
-      <Route path="/details/:id" element={<FoodDetailsAdmin />} />
-      <Route path="/edit/:id" element={<EditFood />} />
-      <Route path="/new" element={<NewFood />} />
-      <Route path="/orders" element={<OrdersAdmin />} />
+      <Route
+        path="/"
+        element={<HomeAdmin setSelectedTheme={setSelectedTheme} selectedTheme={selectedTheme} />}
+      />
+      <Route
+        path="/details/:id"
+        element={<FoodDetailsAdmin setSelectedTheme={setSelectedTheme} selectedTheme={selectedTheme} />}
+      />
+      <Route
+        path="/edit/:id"
+        element={<EditFood setSelectedTheme={setSelectedTheme} selectedTheme={selectedTheme} />}
+      />
+      <Route
+        path="/new"
+        element={<NewFood setSelectedTheme={setSelectedTheme} selectedTheme={selectedTheme} />}
+      />
+      <Route
+        path="/orders"
+        element={<OrdersAdmin setSelectedTheme={setSelectedTheme} selectedTheme={selectedTheme} />}
+      />
     </Routes>
   );
 }

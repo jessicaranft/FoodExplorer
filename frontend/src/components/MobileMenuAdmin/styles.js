@@ -64,12 +64,17 @@ export const Header = styled.div`
   font-size: 2.1rem;
   line-height: 2.5rem;
 
+  a {
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
+
   > button {
     background: none;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
   }
 
   > img {

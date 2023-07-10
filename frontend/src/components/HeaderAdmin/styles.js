@@ -8,9 +8,32 @@ export const Container = styled.div`
 
   padding: 5.6rem 2.8rem 2.4rem;
 
-  display: grid;
-  grid-template-columns: 10% 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
+
+  > button {
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
+
+  .logout {
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
+
+  .themes-btn {
+    background: none;
+    border: none;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   #menu-hamburger {
     width: 2.4rem;

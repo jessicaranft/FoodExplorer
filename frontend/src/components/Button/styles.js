@@ -19,6 +19,10 @@ export const Container = styled.button`
   justify-content: center;
   gap: .8rem;
 
+  .icon {
+    fill: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
+
   ${(props) => props.tomato100 && css`
     background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
   `}

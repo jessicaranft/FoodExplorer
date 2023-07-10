@@ -14,7 +14,6 @@ export function OrderProvider({ children }) {
       const response = await api.get(`/orders?user_id=${user.id}`);
       const order = response.data;
 
-      // Atualize o estado local com a quantidade total de itens do pedido
       setTotalItems(order.total_items || 0);
     }
 

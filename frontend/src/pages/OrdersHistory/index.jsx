@@ -10,7 +10,7 @@ import { Container, Main } from './styles';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 
-export function OrdersHistory() {
+export function OrdersHistory({ selectedTheme, setSelectedTheme }) {
   const { user } = useContext(AuthContext);
   const [foods, setFoods] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -73,7 +73,10 @@ export function OrdersHistory() {
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
         <OrderProvider>
-          <Header />
+          <Header
+            setSelectedTheme={setSelectedTheme}
+            selectedTheme={selectedTheme}  
+          />
         </OrderProvider>
       </SearchContext.Provider>
 

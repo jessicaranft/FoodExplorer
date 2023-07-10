@@ -10,7 +10,7 @@ import { Container, Main } from './styles';
 import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 
-export function Favorites() {
+export function Favorites({ selectedTheme, setSelectedTheme }) {
   const { user } = useContext(AuthContext);
   const [favorites, setFavorites] = useState([]);
   const [foods, setFoods] = useState([]);
@@ -19,7 +19,6 @@ export function Favorites() {
   const [search, setSearch] = useState(searchTitle || "");
 
   async function removeFavorite(id) {
-    //await api.delete("/favorites", { data: { user_id: user.id, id }});
     await api.delete(`/favorites/${user.id}/${id}`);
     setFavorites(prevFavorites => prevFavorites.filter(favorite => favorite.id !== id));
   }
@@ -46,7 +45,10 @@ export function Favorites() {
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
         <OrderProvider>
-          <Header />
+          <Header
+            setSelectedTheme={setSelectedTheme}
+            selectedTheme={selectedTheme}  
+          />
         </OrderProvider>
       </SearchContext.Provider>
 

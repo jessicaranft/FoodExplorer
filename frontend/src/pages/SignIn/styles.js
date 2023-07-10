@@ -56,6 +56,15 @@ export const Form = styled.form`
     margin-top: 1.6rem;
   }
 
+  .themes-btn {
+    background: none;
+    border: none;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   @media (min-width: 769px) {
     width: 47.6rem;
     padding: 6.4rem;

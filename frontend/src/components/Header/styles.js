@@ -12,8 +12,30 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  > button {
+    background: none;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
+
   a {
     color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
+
+  .logout {
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+  }
+
+  .themes-btn {
+    background: none;
+    border: none;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   #menu-hamburger {
@@ -22,6 +44,7 @@ export const Container = styled.div`
 
   #icon-receipt {
     width: 2.6rem;
+    fill: ${({ theme }) => theme.COLORS.LIGHT_100};
   }
 
   .icon-receipt-container {
@@ -88,6 +111,11 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    }
+
+    .button img svg {
+      fill: ${({ theme }) => theme.COLORS.LIGHT_100};
     }
 
     .nav-links {

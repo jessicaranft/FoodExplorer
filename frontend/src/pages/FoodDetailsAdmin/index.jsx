@@ -11,7 +11,7 @@ import { ButtonText } from '../../components/ButtonText';
 import { IngredientTag } from '../../components/IngredientTag';
 import { Button } from '../../components/Button';
 
-export function FoodDetailsAdmin() {
+export function FoodDetailsAdmin({ selectedTheme, setSelectedTheme }) {
   const [foods, setFoods] = useState([]);
   const searchTitle = new URLSearchParams(location.search).get("title");
   const [search, setSearch] = useState(searchTitle || "");
@@ -50,7 +50,10 @@ export function FoodDetailsAdmin() {
   return (
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
-        <HeaderAdmin />
+        <HeaderAdmin
+          setSelectedTheme={setSelectedTheme}
+          selectedTheme={selectedTheme}  
+        />
       </SearchContext.Provider>
 
       <Navigation>
@@ -89,7 +92,7 @@ export function FoodDetailsAdmin() {
           <Button
             title="Editar prato"
             onClick={() => handleEditDetails(data.id)}
-            showIcon={false}
+            showicon={false}
             tomato100
           />
         </div>

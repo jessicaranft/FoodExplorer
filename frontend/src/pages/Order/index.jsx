@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { MdOutlineCreditCard, MdPix } from 'react-icons/md';
 
 import { SearchContext } from '../../hooks/search';
 import { AuthContext } from '../../hooks/auth';
@@ -12,11 +13,9 @@ import { Header } from '../../components/Header';
 import { Footer } from '../../components/Footer';
 import { Button } from '../../components/Button';
 
-import pix from '../../assets/icon-pix.svg';
-import credit from '../../assets/icon-credit.svg';
 import qrCode from '../../assets/pix-qrcode.png';
 
-export function Order() {
+export function Order({ selectedTheme, setSelectedTheme }) {
   const { user } = useContext(AuthContext);
   const [order, setOrder] = useState();
   const [orderItems, setOrderItems] = useState([]);
@@ -83,7 +82,6 @@ export function Order() {
   useEffect(() => {
     async function fetchOrder() {
       const response = await api.get(`/orders?user_id=${user.id}`);
-      //console.log(response.data);
       setOrder(response.data);
       setPrice(response.data.total_price);
     }
@@ -113,7 +111,10 @@ export function Order() {
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
         <OrderProvider>
-          <Header />
+          <Header
+            setSelectedTheme={setSelectedTheme}
+            selectedTheme={selectedTheme}  
+          />
         </OrderProvider>
       </SearchContext.Provider>
 
@@ -165,14 +166,14 @@ export function Order() {
               className={`payment-pix ${IsPixActive ? "active" : ""}`}
               onClick={handlePixMethod}
             >
-              <img src={pix} alt="ícone do pix" />
+              <MdPix size={24 }/>
               Pix
             </button>
             <button
               className={`payment-credit ${IsCreditActive ? "active" : ""}`}
               onClick={handleCreditMethod}
             >
-              <img src={credit} alt="ícone do cartão de crédito" />
+              <MdOutlineCreditCard size={24} />
               Crédito
             </button>
           </div>

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { FiUpload } from 'react-icons/fi';
 
 import { api } from '../../services/api';
 import { SearchContext } from '../../hooks/search';
@@ -12,9 +13,8 @@ import { Input } from '../../components/Input';
 import { IngredientTagItem } from '../../components/IngredientTagItem';
 import { Textarea } from '../../components/Textarea';
 import { Button } from '../../components/Button';
-import iconUpload from '../../assets/icon-upload.svg';
 
-export function EditFood() {
+export function EditFood({ selectedTheme, setSelectedTheme }) {
   const [foods, setFoods] = useState([]);
   const searchTitle = new URLSearchParams(location.search).get("title");
   const [search, setSearch] = useState(searchTitle || "");
@@ -163,7 +163,10 @@ export function EditFood() {
   return (
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
-        <HeaderAdmin />
+        <HeaderAdmin
+          setSelectedTheme={setSelectedTheme}
+          selectedTheme={selectedTheme}  
+        />
       </SearchContext.Provider>
 
       <Navigation>
@@ -183,7 +186,7 @@ export function EditFood() {
             <p>Imagem do prato</p>
             <div className="file-input-container">
               <label htmlFor="image" className="file-input-container">
-                <img src={iconUpload} alt="clique aqui para fazer o upload da imagem do prato" />
+                <FiUpload size={30} />
                 <input type="file" id="image" onChange={handleUpdateImage} />
                 <p className="file-input-message">{fileMessage}</p>
               </label>
@@ -196,7 +199,6 @@ export function EditFood() {
               type="text"
               id="title"
               placeholder="Ex.: Salada Ceasar"
-              showIcon={false}
               onChange={e => setTitle(e.target.value)}
               value={title}
             />
@@ -271,13 +273,13 @@ export function EditFood() {
         <div className="button-container">
           <Button
             title="Excluir prato"
-            showIcon={false}
+            showicon={false}
             dark800
             onClick={handleRemoveFood}
           />
           <Button
             title="Salvar alterações"
-            showIcon={false}
+            showicon={false}
             tomato400
             onClick={handleUpdateFood}
             />

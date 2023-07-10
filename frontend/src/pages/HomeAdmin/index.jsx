@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/swiper-bundle.css';
@@ -16,7 +15,7 @@ import { Footer } from '../../components/Footer';
 
 SwiperCore.use([Navigation]);
 
-export function HomeAdmin() {
+export function HomeAdmin({ selectedTheme, setSelectedTheme }) {
   const [foods, setFoods] = useState([]);
   
   const searchTitle = new URLSearchParams(location.search).get("title");
@@ -41,8 +40,6 @@ export function HomeAdmin() {
     },
   }
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     async function fetchFood() {
       const response = await api.get(`/food?title=${search}`)
@@ -55,7 +52,10 @@ export function HomeAdmin() {
   return (
     <Container>
       <SearchContext.Provider value={{ setSearch }}>
-        <HeaderAdmin />
+        <HeaderAdmin
+          setSelectedTheme={setSelectedTheme}
+          selectedTheme={selectedTheme}  
+        />
       </SearchContext.Provider>
 
       <Main>

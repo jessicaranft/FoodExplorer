@@ -1,18 +1,26 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { MdOutlineDarkMode, MdOutlineLightMode } from 'react-icons/md';
 
 import { api } from '../../services/api';
 
+import { dark, light } from '../../styles/themes';
 import { Container, Branding, Form } from './styles';
 import logo from '../../assets/logo.svg';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 
-export function SignUp() {
+export function SignUp({ selectedTheme, setSelectedTheme }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
+
+  function toggleTheme(e) {
+    e.preventDefault();
+    setSelectedTheme((currentTheme) => currentTheme === dark ? light : dark);
+  }
 
   function handleSignUp() {
     if (!name || !email || !password) {
@@ -49,7 +57,6 @@ export function SignUp() {
               type="text"
               id="name"
               placeholder="Exemplo: Maria da Silva"
-              showIcon={false}
               onChange={e => setName(e.target.value)}
             />
           </div>
@@ -60,7 +67,6 @@ export function SignUp() {
               type="text"
               id="email"
               placeholder="Exemplo: exemplo@exemplo.com.br"
-              showIcon={false}
               onChange={e => setEmail(e.target.value)}
             />
           </div>
@@ -71,7 +77,6 @@ export function SignUp() {
               type="password"
               id="password"
               placeholder="No mínimo 6 caracteres"
-              showIcon={false}
               onChange={e => setPassword(e.target.value)}
             />
           </div>
@@ -89,6 +94,13 @@ export function SignUp() {
             </Link>
           </p>
 
+          <button onClick={toggleTheme} className="themes-btn">
+            {selectedTheme === dark ? (
+              <MdOutlineLightMode size={24} />
+            ) : (
+              <MdOutlineDarkMode size={24} />
+            )}
+          </button>
         </Form>
       </div>
     </Container>
