@@ -6,7 +6,7 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.COLORS.DARK_700};
 
-  padding: 5.6rem 2.8rem 2.4rem;
+  padding: 5.6rem 1.6rem 2.4rem;
 
   display: flex;
   flex-direction: row;
@@ -45,6 +45,10 @@ export const Container = styled.div`
 
   #menu {
     animation: slide 700ms;
+  }
+
+  .desktop-only {
+    display: none;
   }
 
   @keyframes slide {

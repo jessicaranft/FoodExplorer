@@ -6,7 +6,7 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.COLORS.DARK_700};
 
-  padding: 5.6rem 2.8rem 2.4rem;
+  padding: 5.6rem 1.6rem 2.4rem;
 
   display: flex;
   justify-content: space-between;
@@ -77,6 +77,10 @@ export const Container = styled.div`
   }
 
   .hide {
+    display: none;
+  }
+
+  .desktop-only {
     display: none;
   }
 

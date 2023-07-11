@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   position: relative;
   width: 100%;
+  height: 32rem;
   padding: 2.4rem;
 
   background-color: ${({ theme }) => theme.COLORS.DARK_100};
@@ -10,7 +11,7 @@ export const Container = styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 1.2rem;
 

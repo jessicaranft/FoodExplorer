@@ -8,7 +8,7 @@ export const Container = styled.div`
 `;
 
 export const Navigation = styled.div`
-  padding: 3.6rem 5.6rem 0;
+  padding: 3.6rem 2.4rem 0;
 
   @media (min-width: 769px) {
     padding: 4.8rem 12.4rem 0;
@@ -16,7 +16,7 @@ export const Navigation = styled.div`
 `;
 
 export const Main = styled.main`
-  padding: 3.6rem 5.6rem;
+  padding: 3.6rem 2.4rem;
 
   display: flex;
   flex-direction: column;

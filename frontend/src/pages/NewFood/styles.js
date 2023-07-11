@@ -10,7 +10,7 @@ export const Container = styled.div`
 `;
 
 export const Form = styled.form`
-  padding: 2.4rem 3.2rem 3.2rem;
+  padding: 2.4rem;
 
   display: flex;
   flex-direction: column;
@@ -104,9 +104,8 @@ export const Form = styled.form`
 
   .ingredients-tags-container {
     width: 100%;
-    height: 4.8rem;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: auto auto auto;
     gap: 1.6rem;
 
     background: ${({ theme }) => theme.COLORS.DARK_800};
@@ -151,6 +150,11 @@ export const Form = styled.form`
       grid-template-columns: 4fr 1fr;
     }
 
+    .ingredients-tags-container {
+      display: grid;
+      grid-template-columns: auto auto auto auto auto auto;
+    }
+
     .button-container {
       display: flex;
       justify-content: right;
@@ -163,7 +167,7 @@ export const Form = styled.form`
 `;
 
 export const Navigation = styled.div`
-  padding: 1rem 3.2rem 0;
+  padding: 1rem 2.4rem 0;
   
   @media (min-width: 769px) {
     padding: 4rem 12.4rem 0;

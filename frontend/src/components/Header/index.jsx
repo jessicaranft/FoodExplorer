@@ -97,7 +97,7 @@ export function Header({ selectedTheme, setSelectedTheme }) {
         <SearchInput
           type="text"
           placeholder="Busque por pratos ou ingredientes"
-          className="input desktop-only"
+          className="desktop-only input"
           value={searchInput}
           onChange={handleSearch}
           ref={inputRef}
@@ -128,13 +128,13 @@ export function Header({ selectedTheme, setSelectedTheme }) {
             title={`Meu pedido (${totalItems})`}
             showicon={true}
             tomato100="true"
-            className="button desktop-only"
+            className="desktop-only button"
             as={Link}
             to="/order"
           />
         }
         
-        <Logout onClick={handleSignOut} className="logout desktop-only">
+        <Logout onClick={handleSignOut} className="desktop-only logout">
           <MdOutlineLogout size={30} />
         </Logout>
 

@@ -80,7 +80,7 @@ export function HeaderAdmin({ selectedTheme, setSelectedTheme }) {
         <SearchInput
           type="text"
           placeholder="Busque pelas opções de pratos"
-          className="input desktop-only"
+          className="desktop-only input"
           value={searchInput}
           onChange={handleSearch}
           ref={inputRef}
@@ -101,9 +101,9 @@ export function HeaderAdmin({ selectedTheme, setSelectedTheme }) {
           </button>
         </div>
 
-        <Button tomato100="true" title="Novo prato" showicon={false} className="button desktop-only" as={Link} to="/new" />
+        <Button tomato100="true" title="Novo prato" showicon={false} className="desktop-only button" as={Link} to="/new" />
 
-        <Logout onClick={handleSignOut} className="logout desktop-only">
+        <Logout onClick={handleSignOut} className="desktop-only logout">
           <MdOutlineLogout size={30} />
         </Logout>
       </div>

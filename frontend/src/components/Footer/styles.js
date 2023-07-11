@@ -15,7 +15,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  padding: 2.7rem;
+  padding: 1.6rem;
 
   @media (min-width: 769px) {
     padding: 0 12.3rem;
