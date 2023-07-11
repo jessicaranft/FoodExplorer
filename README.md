@@ -1,8 +1,8 @@
 # FoodExplorer
 
-🔗 <a href="https://frontend-foodexplorer.netlify.app/" target="_blank">Clique aqui para visualizar</a>
+🔗 <a href="https://frontend-foodexplorer.netlify.app/" target="_blank">Clique aqui para visualizar a aplicação no ar.</a>
 
-![preview](https://github.com/jessicaranft/portfolio/blob/main/.github/preview.png)
+![preview](https://github.com/jessicaranft/FoodExplorer/blob/main/.github/preview.png)
 
 O FoodExplorer é um menu interativo de um restaurante fictício.
 <br><br>
@@ -17,7 +17,7 @@ O usuário pode visualizar todos os pratos cadastrados e, quando clica em um p
 <strong>Milhas extras:</strong>
 - O usuário pode marcar ou desmarcar um prato como favorito;
 - O usuário pode incluir itens no carrinho, e a quantidade é controlada pelos botões + e -;
-- Ao clicar em "finalizar pedido" na página de pedidos, o pedido é concluído e entra na página de histórico com o status de "preparando";
+- Ao clicar em "finalizar pedido" na página de pedidos, o pedido é concluído e entra para o histórico com o status de "preparando";
 - O usuário pode ver seu histórico de pedido, com data, status e itens dos pedidos;
 - O admin pode visualizar e controlar o status de cada pedido (pendente, preparando ou entregue);
 - O layout possui versões dark & light.
@@ -77,7 +77,7 @@ $ npm run dev
 ```
 
 ## 💻 Visualize a aplicação no ar:
-<a href="https://frontend-foodexplorer.netlify.app/" target="_blank">Clique neste link</a> para acessar a aplicação no ar.
+<a href="https://frontend-foodexplorer.netlify.app/">Clique neste link</a> para acessar a aplicação no ar.
 <br><br>
 Você pode usar os dados abaixo para logar na conta de um usuário que já tem um histórico de pedidos e favoritos:
 
@@ -92,6 +92,8 @@ Ou use as credenciais abaixo para logar como administrador:
   e-mail: admin@exemplo.com
   senha: 12345
 ```
+
+Fique à vontade também para criar seu próprio usuário comum e testar a aplicação fazendo novos pedidos.
 
 ## 📝 License
 
