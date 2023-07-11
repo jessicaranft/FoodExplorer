@@ -143,6 +143,10 @@ export const Container = styled.div`
     .mobile-only {
       display: none;
     }
+
+    .desktop-only {
+      display: flex;
+    }
   }
 `;
 

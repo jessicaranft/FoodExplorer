@@ -16,13 +16,15 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
+  touch-action: none;
+
   .hide {
     display: none;
   }
 
   > main {
     flex-grow: 1;
-    padding: 3.6rem 2.8rem;
+    padding: 3.6rem 2.8rem 0;
   }
 
   nav {

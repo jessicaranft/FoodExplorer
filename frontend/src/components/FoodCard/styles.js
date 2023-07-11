@@ -65,7 +65,8 @@ export const Container = styled.div`
   }
 
   @media (min-width: 769px) {
-    width: 304px;
+    width: 30.4rem;
+    height: 48rem;
     gap: 1.6rem;
 
     > button {

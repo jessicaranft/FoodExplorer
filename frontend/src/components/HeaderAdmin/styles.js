@@ -97,6 +97,10 @@ export const Container = styled.div`
       align-items: center;
       gap: 1.6rem;
     }
+
+    .desktop-only {
+      display: flex;
+    }
   }
 `;
 

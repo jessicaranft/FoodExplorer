@@ -6,7 +6,6 @@ import { useAuth } from '../../hooks/auth';
 import { SearchContext } from '../../hooks/search';
 
 import { Container, Header, Logout } from './styles';
-import { Footer } from '../../components/Footer';
 import { SearchInput } from '../../components/SearchInput';
 import searchIcon from '../../assets/icon-search.svg';
 
@@ -67,7 +66,6 @@ export function MobileMenu({ className, id }) {
             </ul>
           </nav>
         </main>
-      <Footer />
     </Container>
   );
 }

@@ -16,6 +16,8 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
+  touch-action: none;
+
   .hide {
     display: none;
   }
